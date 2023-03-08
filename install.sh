@@ -1,2 +1,2 @@
 #!/bin/bash
-echo alias tubestore=\"python3 $PWD/main.py\" >> ~/.bashrc
+echo alias tubestore=\"cd $PWD \; python3 main.py\" >> ~/.bashrc
