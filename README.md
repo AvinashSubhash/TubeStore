@@ -10,3 +10,13 @@ We convert your files into a video, which can then be stored into youtube! Hurra
 
 This tool can convert data to video format, and back to original data as well.
 
+# Installation
+Give permission to run the install.sh file - ```sudo chmod 777 install.sh```
+
+Run the script
+
+# Usage
+1. Use command ```tubestore``` to start the tool
+2. The output video gets saved in the tubestore directory
+3. Currently this tool is tested only on linux
+
