@@ -5,6 +5,7 @@ import os
 if __name__ == "__main__":
     os.system("clear")
     while True:
+        print("TubeStore - Convert your data to youtube uploadable video format\n\n")
         print("1. Create video from data\n")
         print("2. Retrieve data from video\n")
         print("3. Exit Program\n")
