@@ -1,7 +1,9 @@
 import cv2
 import numpy as np
-INITIAL=6123128
-def binaryToVideo(binary_data):
+def binaryToVideo(cache,path):
+    binary_data = cache[0]
+    ext = cache[1]
+    filename = path.split("/")[-1].split(".")[-2]
     array = np.array(list(binary_data)).astype(np.uint8)
     res_array = array
     size = len(binary_data)
@@ -19,19 +21,22 @@ def binaryToVideo(binary_data):
     fps = 30
     width = frame_size[0]
     height = frame_size[1]
-    
-    out = cv2.VideoWriter('output.mp4',fourcc,fps,(width,height))
+    print(str(filename)+"-Video-"+str(difference)+"-"+str(ext)+".mp4")
+    out = cv2.VideoWriter(str(filename)+"-Video-"+str(difference)+"-"+str(ext)+".mp4",fourcc,fps,(width,height))
 
     for i in range(frames):
         img = np.zeros((frame_size[0], frame_size[1], 3), dtype=np.uint8)
         img[array[i] == 1] = [255, 255, 255]
         out.write(img)
     out.release()
+    return [difference,ext]
 
 
 def videoToBinary(video_path):
+    [ext,difference] = [video_path.split(".")[0].split("-")[-1],video_path.split(".")[0].split("-")[-2]]
     binary_data = []
-    cap = cv2.VideoCapture("output.mp4")
+    filename = video_path.split(".")[0]
+    cap = cv2.VideoCapture(video_path)
     while True:
         ret,frame = cap.read()
         #print(ret,frame)
@@ -43,8 +48,8 @@ def videoToBinary(video_path):
         for i in data:
             binary_data.extend(i)
     print("Length of binary data recovered: ",len(binary_data))
-    binary_data = binary_data[:INITIAL]
+    binary_data = binary_data[:0-int(difference)]
     #print(array[:10],binary_data[:10])
     res = ''.join(str(i) for i in binary_data)
     cap.release()
-    return res
+    return [filename+"."+ext,res]

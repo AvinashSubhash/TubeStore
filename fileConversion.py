@@ -1,5 +1,7 @@
-INITIAL_DATA = 0
-def binaryToFile(filename,binary_string):
+
+def binaryToFile(cache):
+    filename = cache[0]
+    binary_string = cache[1]
     byte_array = bytearray()
     for i in range(0, len(binary_string), 8):
         byte = int(binary_string[i:i+8], 2)
@@ -10,17 +12,12 @@ def binaryToFile(filename,binary_string):
         file.write(byte_array)
 
 def fileToBinary(filename):
+    ext = filename.split(".")[-1]
     with open(str(filename),'rb') as f:
         contents = f.read()
         binary = ''.join(format(byte,'08b') for byte in contents)
-        INITIAL_DATA = binary
         #binaryToFile("final_output.pdf",binary)   
         
-    return binary
+    return [binary,ext]
 
-import videoConversion as vc
-vc.binaryToVideo(fileToBinary("Codechef-problems.zip"))
-#print("Video to binary: ",vc.videoToBinary("binary_video.mp4"))
-binary = vc.videoToBinary("Codechef-problems.mp4")
-#_ = binaryToFile("out.zip",binary)
 
