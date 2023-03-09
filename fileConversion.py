@@ -18,6 +18,7 @@ def fileToBinary(filename):
         binary = ''.join(format(byte,'08b') for byte in contents)
         #binaryToFile("final_output.pdf",binary)   
         
+        
     return [binary,ext]
 
 
